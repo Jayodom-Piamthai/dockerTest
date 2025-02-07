@@ -8,7 +8,8 @@
 
 ARG NODE_VERSION=22.11.0
 
-FROM node:${NODE_VERSION}-alpine
+FROM node:18-alpine AS build
+
 
 # Use production node environment by default.
 ENV NODE_ENV production
@@ -30,6 +31,12 @@ USER node
 
 # Copy the rest of the source files into the image.
 COPY . .
+
+
+#generate prisma database inside mysql
+RUN npm init -y
+# RUN npm install prisma @prisma/client
+# RUN npx prisma generate
 
 # Expose the port that the application listens on.
 EXPOSE 33312

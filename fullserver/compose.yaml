@@ -14,35 +14,22 @@ services:
       context: php_apache_front/
     ports:
       - 33311:80
-    networks:
-      - my_network
   node_front:
     build: 
       dockerfile: node_front.Dockerfile
       context: node_front/
     ports:
       - 33312:33312
-    networks:
-      - my_network
-    depends_on:
-      - sql_database
   # php_back:
   #   build:
   #     dockerfile: php_back.Dockerfile
   #     context: php_back/
   sql_database:
-    build:
-      dockerfile: sql_database.Dockerfile
-      context: sql_database/
+    image:
   mongo_database:
     build:
       dockerfile: mongo_database.Dockerfile
       context: mongo_database/
-    networks:
-      - my_network
-
-networks:
-  my_network:
   # prisma_database:
   #   build:
   #     dockerfile: prisma_database.Dockerfile
